@@ -361,6 +361,8 @@ public class MVNPEntityListener implements Listener {
                 try {
                     Class.forName("org.bukkit.TravelAgent");
                     event.getPortalTravelAgent().setCanCreatePortal(true);
+                    // Depending on the scaling decrease the search radius (to match the vanilla behavior)
+                    event.getPortalTravelAgent().setSearchRadius((int)(128 / toWorld.getScaling()));
                     event.setTo(event.getPortalTravelAgent().findOrCreate(event.getTo()));
                 } catch (ClassNotFoundException ignore) {
                     Logging.fine("TravelAgent not available for EntityPortalEvent for " + e.getName() + ". Their destination may not be correct.");
